@@ -23,10 +23,14 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 # Install Python packages for fine-tuning with CUDA 12.1 for RTX 4090
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir \
-    torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 && \
-    pip install --no-cache-dir \
+# First upgrade pip
+RUN pip install --no-cache-dir --upgrade pip
+
+# Install PyTorch with CUDA 12.1
+RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Install other packages
+RUN pip install --no-cache-dir \
     transformers==4.36.2 \
     peft==0.7.1 \
     bitsandbytes==0.41.3 \
@@ -37,7 +41,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
     huggingface-hub \
     wandb \
     tensorboard \
-    xformers  # For RTX 4090 optimization
+    xformers
 
 # Model will be downloaded on first use to avoid build size limits
 # Set HF cache directory for when model is downloaded
