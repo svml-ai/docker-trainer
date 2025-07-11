@@ -14,7 +14,7 @@ Docker image for fine-tuning DeepSeek Coder 6.7B model with SVML+AMM support.
 This image is designed for use with RunPod or other GPU cloud providers:
 
 ```bash
-docker pull scalabl3/svml-coder-training:latest
+docker pull scalabl3/svml-coder-training:latest 
 ```
 
 ## RunPod Template Settings
