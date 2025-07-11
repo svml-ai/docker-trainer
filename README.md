@@ -5,7 +5,7 @@ Docker image for fine-tuning DeepSeek Coder 6.7B model with SVML+AMM support.
 ## What's Included
 
 - PyTorch 2.0.1 with CUDA 11.8 support
-- DeepSeek Coder 6.7B base model (pre-downloaded)
+- DeepSeek Coder 6.7B base model (downloads on first use)
 - PEFT/LoRA libraries for efficient fine-tuning
 - All necessary dependencies for training
 

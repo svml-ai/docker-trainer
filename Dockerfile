@@ -32,13 +32,8 @@ RUN pip install --no-cache-dir \
     wandb \
     tensorboard
 
-# Pre-download model files (just download, don't load into memory)
-RUN python -c "from huggingface_hub import snapshot_download; \
-    snapshot_download('deepseek-ai/deepseek-coder-6.7b-base', \
-    cache_dir='/workspace/model_cache', \
-    local_files_only=False)"
-
-# Set HF cache to use our pre-downloaded models
+# Model will be downloaded on first use to avoid build size limits
+# Set HF cache directory for when model is downloaded
 ENV HF_HOME=/workspace/model_cache
 
 # Create working directories
@@ -51,7 +46,7 @@ echo "========================================"\n\
 echo ""\n\
 echo "Environment:"\n\
 echo "  - PyTorch 2.0.1 with CUDA 11.8"\n\
-echo "  - DeepSeek Coder 6.7B base model (pre-downloaded in /workspace/model_cache)"\n\
+echo "  - DeepSeek Coder 6.7B base model (will download on first use)"\n\
 echo "  - PEFT/LoRA libraries installed"\n\
 echo ""\n\
 echo "GPU Status:"\n\
