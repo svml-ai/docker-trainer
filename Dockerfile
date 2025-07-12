@@ -42,8 +42,9 @@ RUN pip install --no-cache-dir \
 # pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 # Model will be downloaded on first use to avoid build size limits
-# Set HF cache directory for when model is downloaded
-ENV HF_HOME=/workspace/model_cache
+# Set HF cache directory to persistent volume
+ENV HF_HOME=/runpod/cache
+ENV TRANSFORMERS_CACHE=/runpod/cache
 
 # Create working directories
 RUN mkdir -p /workspace/scripts /workspace/data /workspace/model
